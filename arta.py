@@ -6,7 +6,6 @@ root.iconbitmap('mortar_81.ico')
 root.title('АРТА')
 root.geometry('777x777')
 root.resizable(1, 1)
-# root.config(bg='black')
 root['bg'] = 'green'
 
 label = Label(
