@@ -82,8 +82,8 @@ def find_aim_x_y(): # сам метод расчета коодинат цели
     dir_ang=math.radians(float(dir_angle.get()))
     # dir_ang_rad = math.radians(dir_ang)  # Обязательно!
 
-    aim_x = pos_x + dist * math.cos(dir_ang)
-    aim_y = pos_y + dist * math.sin(dir_ang)
+    aim_x = round(pos_x + dist * math.cos(dir_ang),3)
+    aim_y = round(pos_y + dist * math.sin(dir_ang),3)
     label_aim_coords.configure(text=f'X цели={aim_x}, Y цели={aim_y}')
 
 
