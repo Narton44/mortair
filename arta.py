@@ -4,8 +4,8 @@ import math
 root = Tk()
 
 root.title('АРТА')
-root.geometry('777x400')
-root.resizable(1, 1)
+root.geometry('710x380')
+root.resizable(0, 0)
 root['bg'] = 'green'
 root.iconbitmap('mortar_81.ico')
 
@@ -73,14 +73,72 @@ btn.place(x=10,y=230)
 
 # ----------------------Обратная геодезическая задача----------------------
 
-ogz_frame = Frame(root)
-ogz_frame.pack(padx=250,pady=50)
+label_firepoint_x = Label(root, text='Х позиции', width=11,)
+label_firepoint_x.place(x=400,y=50)
 
-fire_point_x = Label(ogz_frame, text="X позиции")  # Сохраняем ссылку
-fire_point_x.grid(row=0, column=0)  # Размещаем отдельно
+entry_firepoint_x = Entry(root)
+entry_firepoint_x.insert(0,'200')
+entry_firepoint_x.place(x=400,y=70)
 
-fire_point_y = Label(ogz_frame, text="Y позиции")  # Сохраняем ссылку
-fire_point_y.grid(row=0, column=1)  # Размещаем отдельно
+
+label_firepoint_y = Label(root, text='Y позиции', width=11)
+label_firepoint_y.place(x=400,y=97)
+
+entry_firepoint_y = Entry(root)
+entry_firepoint_y.insert(0,'400')
+entry_firepoint_y.place(x=400,y=115)
+
+
+label_aim_x = Label( root, text='Х цели', width=11,)
+label_aim_x.place(x=400,y=140)
+
+entry_aim_x = Entry(root)
+entry_aim_x.insert(0,'400')
+entry_aim_x.place(x=400,y=160)
+
+
+label_aim_y = Label( root, text='Y цели', width=11,)
+label_aim_y.place(x=400,y=185)
+
+entry_aim_y = Entry(root)
+entry_aim_y.insert(0,'600')
+entry_aim_y.place(x=400,y=205)
+
+
+label_angle_and_distance = Label(root, text=' ', font=(None, 10, "bold"), width=24, height=2)
+label_angle_and_distance.place(x=400,y=300)
+
+
+def find_angle_and_distance(): # сам метод расчета коодинат цели
+
+    delta_x=float(entry_aim_x.get()) - float(entry_firepoint_x.get())
+    delta_y=float(entry_aim_y.get()) - float(entry_firepoint_y.get())
+    
+    dist = round(math.sqrt(delta_x**2 + delta_y**2),2)
+
+    rhumb = math.atan(delta_y / delta_x)
+
+    if delta_x > 0 and delta_y > 0:
+        dir_ang = rhumb
+    elif delta_x < 0 and delta_y > 0:
+        dir_ang = 180 - rhumb
+    elif delta_x < 0 and delta_y < 0:
+        dir_ang = 180 + rhumb
+    elif delta_x > 0 and delta_y < 0:
+        dir_ang = 360 - rhumb
+
+
+    label_angle_and_distance.configure(text=f'Дирекционный угол: {dir_ang}\nДистанция: {dist}')
+    print(dist)
+
+btn = Button( # кнопка запуска расчета дирекционного угла и дистанции до цели
+    root,
+    text='Рассчитать дирекционный угол и дистанцию',
+    command=find_angle_and_distance,
+    font=('Comic Sans MS', 10, 'bold'),
+    cursor='hand2',
+    )
+btn.place(x=400,y=230)
 
 
 mainloop()
