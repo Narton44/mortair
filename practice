@@ -1,0 +1,37 @@
+from tkinter import *
+
+window = Tk()
+window.title('frame_test')
+window.geometry('300x300')
+window.minsize(width=300, height=300)
+window.maxsize(width=1900, height=900)
+# window.resizable(width='False', height='False')
+
+# frame_wrap = Frame(window)
+frame_pgz = Frame(window,width=150, height=150, bg='#FF0000')
+frame_ogz = Frame(window,width=150, height=150, bg='#00FF00')
+frame_results = Frame(window,width=300, height=150, bg="#0000FF")
+
+
+# -------------------------------- оптимальный метод для адаптивных приложений со статическим и динамическим наполнением (желательно с НЕрегулируемым размером главного окна и абсолютные рзамеры фрэймов)
+
+# frame_pgz.grid(row=0, column=0)
+# frame_ogz.grid(row=0, column=1)
+# frame_results.grid(row=2, column=0, columnspan=2) # растягивает фрэйм на две ячейки сетки grid 
+
+
+# ------------------------------ если известны рзамеры приложения или пропорции, и заполнение приложения всегда одинаково (используются относительные координаты, высота и ширина фрэймов)
+
+frame_pgz.place(relx=0, rely=0, relwidth=0.5, relheight=0.5)
+frame_ogz.place(relx=0.5, rely=0, relwidth=0.5, relheight=0.5 )
+
+frame_results.place(relx=0, rely=0.5, relwidth= 1, relheight=0.5)
+
+
+# ---------------------------------------------------- если есть простой дизайн и надо просто расположить блоки frame
+# frame_wrap.pack(fill='x')
+# frame_pgz.pack(side='left', fill='both', expand=True, ipady=60) # -after, -anchor, -before, -expand, -fill, -in, -ipadx, -ipady, -padx, -pady, -side
+# frame_ogz.pack(side='right', fill='both', expand=True, ipady=60)
+# frame_results.pack(side='bottom', fill='both', expand=True)
+
+window.mainloop()
